@@ -16,7 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from accounting import views as accounting_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', accounting_views.landing, name='landing'),  # Landing page URL
 ]
