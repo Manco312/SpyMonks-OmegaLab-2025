@@ -1,21 +1,17 @@
-# 💻 Desarrollo – OmegaLab 2025
+# 💻 Desarrollo – SpyMonks - OmegaLab 2025
 
-## ¡Bienvenidos a la carpeta de Desarrollo!
+## ¡Bienvenidos a la carpeta de Desarrollo de SpyMonks!
 
-Aquí se debe subir **todo el material y avances técnicos** que el área de Desarrollo genere durante el reto OmegaLab 2025.
+### 💻 Código del proyecto
 
----
+El código del proyecto StudentEase se encuentra en la carpeta que se encuentra en esta sección del repositorio, llamada studenteaseprojecto. Dentro de esta carpeta se puede encontrar un README que contiene las instrucciones para ejecutar el proyecto.
 
-## 🛠️ ¿Qué tipo de contenidos pueden ir aquí?
+### 🗺️ Diagrama de Alto Nivel
 
-- Código fuente del proyecto
-- Documentación técnica
-- Pruebas y prototipos funcionales
-- Avances de desarrollo y mejoras
-- Cualquier otro recurso relacionado con la parte técnica o de programación
+El siguiente diagrama representa la solución codificada en un alto nivel.
 
-> ℹ️ **Nota:** No es necesario seguir un formato exacto, pero es importante mantener el contenido organizado, claro y actualizado para facilitar su revisión.
 
----
+### 📡 Diagrama de despliegue
 
-¡Mucho éxito programando y creando cosas increíbles! 🚀
+El siguiente diagrama representa cómo estaría desplegada la aplicación cuando ya esté abierta al público, logrando que ingresen usuarios desde sus computadores o desde sus celulares.
+
