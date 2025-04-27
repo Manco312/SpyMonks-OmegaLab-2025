@@ -4,7 +4,7 @@
 
 ### 💻 Código del proyecto
 
-El código del proyecto StudentEase se encuentra en la carpeta que se encuentra en esta sección del repositorio, llamada studenteaseprojecto. Dentro de esta carpeta se puede encontrar un README que contiene las instrucciones para ejecutar el proyecto.
+El proyecto StudentEase se realizó a través del framework Django para desarrollo web, integrando la API de OpenAI para realizar las funcionalidades de IA dentro del proyecto y Bootstrap para lograr que todos lo componentes sean responsivos independiente del dispositivo que acceda a la aplicación. El código se encuentra en la carpeta que se encuentra en esta sección del repositorio, llamada studenteaseproject. Dentro de esta carpeta se puede encontrar un README que contiene las instrucciones para ejecutar el proyecto.
 
 ### 🗺️ Diagrama de Alto Nivel
 
