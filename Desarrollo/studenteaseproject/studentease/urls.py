@@ -25,5 +25,6 @@ urlpatterns = [
     path('', accounting_views.landing, name='landing'),  # Landing page URL
     path('accounting/', include('accounting.urls')),  # Include accounting app URLs
     path('userspace/', include('userspace.urls')),  # Include userspace app URLs
+    path('aifunctions/', include('aifunctions.urls')),  # Include aifunctions app URLs
 ]
 
