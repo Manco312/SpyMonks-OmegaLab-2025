@@ -64,6 +64,10 @@
     <div class="d-flex justify-content-center align-items-center min-vh-100">
         <div class="landing-card">
             <h1 class="display-5 fw-bold mb-4">Bienvenido a StudentEase</h1>
+
+            {% load static %}
+            <img src="{% static 'images/LOGO v5.png' %}" alt="StudentEase Logo" class="img-fluid mb-4" style="max-width: 200px;">
+
             <p class="lead mb-5">Simplifica tu vida académica con nuestra plataforma intuitiva y poderosa.</p>
             <div>
                 <a href="{% url 'login' %}" class="btn btn-login">Iniciar Sesión</a>
