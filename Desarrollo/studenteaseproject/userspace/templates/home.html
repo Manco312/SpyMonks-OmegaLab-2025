@@ -384,7 +384,7 @@
                         </div>
                         <h3 class="feature-title">Organizar Tareas y Fechas</h3>
                         <p class="feature-description">Planifica tus tareas, exámenes y actividades académicas con nuestro organizador inteligente.</p>
-                        <a href="{% url 'landing' %}" class="btn {% if not semestre_creado %}btn-disabled{% else %}btn-custom{% endif %} w-100" 
+                        <a href="{% url 'calendario' %}" class="btn {% if not semestre_creado %}btn-disabled{% else %}btn-custom{% endif %} w-100" 
                            {% if not semestre_creado %}disabled{% endif %}>
                            <i class="fas fa-list-check"></i> Organizar Tareas
                         </a>

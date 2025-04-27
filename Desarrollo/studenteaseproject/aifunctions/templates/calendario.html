@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudentEase - Calendario</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEJQ2iqY7cMw3X9A2DX2INp6A4x2iCZbFQebcnEbkzVp6ISvHkzoXfz59ZxW8" crossorigin="anonymous">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --white: #fafafa;
+            --dark-blue: #003153;
+            --coral: #ff6b6b;
+            --light-blue: #b0d0d3;
+            --blue-gray: #bccad6;
+        }
+        
+        body {
+            background-color: var(--white);
+            font-family: 'Poppins', sans-serif;
+            color: #333;
+            padding-top: 20px;
+        }
+        
+        /* Navbar Styling */
+        .navbar {
+            background-color: var(--dark-blue);
+            box-shadow: 0 4px 15px rgba(0, 49, 83, 0.2);
+            padding: 15px 0;
+            border-radius: 50px;
+            margin: 0 15px 20px 15px;
+            max-width: calc(100% - 30px);
+            overflow: hidden;
+        }
+        
+        .navbar-container {
+            padding: 0 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            position: relative;
+        }
+        
+        .navbar .navbar-brand {
+            color: var(--white);
+            font-weight: 700;
+            font-size: 1.5rem;
+            letter-spacing: 0.5px;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+        
+        .user-profile {
+            display: flex;
+            align-items: center;
+            margin-right: 25px;
+            padding-right: 10px;
+        }
+        
+        .navbar .navbar-text {
+            color: var(--white);
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 200px;
+        }
+        
+        .navbar .navbar-text i {
+            margin-right: 8px;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+        
+        /* Calendar Container */
+        .calendar-container {
+            background-color: var(--white);
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 49, 83, 0.08);
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        
+        /* Eventos List */
+        .eventos-list {
+            margin-top: 20px;
+        }
+        
+        .evento-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 49, 83, 0.1);
+            padding: 15px;
+            margin-bottom: 15px;
+            border-left: 4px solid var(--dark-blue);
+            transition: transform 0.2s ease;
+        }
+        
+        .evento-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 49, 83, 0.15);
+        }
+        
+        .evento-title {
+            color: var(--dark-blue);
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+        
+        .evento-date {
+            color: var(--coral);
+            font-weight: 500;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .evento-date i {
+            margin-right: 5px;
+        }
+        
+        .evento-description {
+            color: #555;
+            font-size: 0.95rem;
+            margin-bottom: 10px;
+        }
+        
+        .evento-actions {
+            display: flex;
+            justify-content: flex-end;
+        }
+        
+        .btn-delete {
+            color: #d63939;
+            background-color: rgba(255, 107, 107, 0.1);
+            border: none;
+            border-radius: 50px;
+            padding: 5px 15px;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+        }
+        
+        .btn-delete:hover {
+            background-color: rgba(255, 107, 107, 0.2);
+            color: #d63939;
+        }
+        
+        .no-eventos {
+            text-align: center;
+            padding: 30px;
+            color: #777;
+            font-style: italic;
+        }
+        
+        /* Form Styling */
+        .form-container {
+            background-color: var(--white);
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 49, 83, 0.08);
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .form-container h3 {
+            color: var(--dark-blue);
+            font-weight: 600;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+        
+        .form-label {
+            color: var(--dark-blue);
+            font-weight: 500;
+        }
+        
+        .form-control:focus {
+            border-color: var(--light-blue);
+            box-shadow: 0 0 0 0.25rem rgba(176, 208, 211, 0.25);
+        }
+        
+        /* Recommendations Panel */
+        .recommendations-container {
+            background-color: var(--white);
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 49, 83, 0.08);
+            padding: 20px;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .recommendations-container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 5px;
+            height: 100%;
+            background-color: var(--coral);
+            border-radius: 0 15px 15px 0;
+        }
+        
+        .recommendations-container h3 {
+            color: var(--dark-blue);
+            font-weight: 600;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+        
+        .recommendations-content {
+            color: #555;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            white-space: pre-line;
+        }
+        
+        /* Buttons */
+        .btn-custom {
+            background-color: var(--dark-blue);
+            color: var(--white);
+            border: none;
+            border-radius: 50px;
+            padding: 10px 20px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 49, 83, 0.2);
+        }
+        
+        .btn-custom:hover {
+            background-color: var(--coral);
+            color: var(--white);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(255, 107, 107, 0.3);
+        }
+        
+        /* Footer */
+        .footer {
+            background-color: var(--dark-blue);
+            color: var(--white);
+            padding: 30px 0;
+            margin-top: 50px;
+            border-radius: 50px 50px 0 0;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 25px;
+        }
+        
+        .footer-logo {
+            font-weight: 700;
+            font-size: 1.3rem;
+        }
+        
+        .footer-links a {
+            color: var(--white);
+            margin-left: 20px;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--coral);
+        }
+        
+        /* Alert Messages */
+        .alert-container {
+            margin-bottom: 20px;
+        }
+        
+        .alert {
+            border-radius: 10px;
+            border: none;
+        }
+        
+        .alert-success {
+            background-color: rgba(176, 208, 211, 0.3);
+            color: var(--dark-blue);
+        }
+        
+        .alert-danger {
+            background-color: rgba(255, 107, 107, 0.3);
+            color: #d63939;
+        }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 992px) {
+            .recommendations-container {
+                margin-top: 30px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .navbar {
+                border-radius: 30px;
+                margin: 0 10px 15px 10px;
+            }
+            
+            .navbar-container {
+                padding: 0 15px;
+            }
+            
+            .navbar .navbar-brand {
+                font-size: 1.2rem;
+                margin-right: 10px;
+            }
+            
+            .navbar .navbar-text {
+                max-width: 120px;
+                font-size: 0.9rem;
+            }
+            
+            .calendar-container,
+            .form-container,
+            .recommendations-container {
+                padding: 15px;
+            }
+            
+            .footer {
+                border-radius: 30px 30px 0 0;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+                padding: 0 15px;
+            }
+            
+            .footer-links {
+                margin-top: 15px;
+            }
+            
+            .footer-links a {
+                margin: 0 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <div class="navbar-container">
+                <a class="navbar-brand" href="{% url 'home' %}">
+                    <i class="fas fa-graduation-cap"></i> StudentEase
+                </a>
+                <div class="user-profile">
+                    <span class="navbar-text">
+                        <i class="fas fa-user-circle"></i> {{ user_name }}
+                    </span>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="row">
+            <!-- Calendar and Form Column -->
+            <div class="col-lg-8">
+                <!-- Calendar -->
+                <div class="calendar-container">
+                    <h3><i class="fas fa-calendar-alt"></i> Mis Eventos</h3>
+                    
+                    <div class="eventos-list">
+                        {% if eventos %}
+                            {% for evento in eventos %}
+                                <div class="evento-card">
+                                    <h4 class="evento-title">{{ evento.nombre }}</h4>
+                                    <div class="evento-date">
+                                        <i class="fas fa-calendar-day"></i> {{ evento.fecha|date:"l, j \d\e F \d\e Y" }}
+                                    </div>
+                                    <p class="evento-description">{{ evento.descripcion }}</p>
+                                    <div class="evento-actions">
+                                        <a href="{% url 'eliminar_evento' evento.id %}" class="btn btn-delete">
+                                            <i class="fas fa-trash-alt"></i> Eliminar
+                                        </a>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <div class="no-eventos">
+                                <p><i class="fas fa-info-circle"></i> No tienes eventos programados. ¡Agrega uno nuevo!</p>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+                
+                <!-- Add Event Form -->
+                <div class="form-container">
+                    <h3><i class="fas fa-plus-circle"></i> Agregar Nuevo Evento</h3>
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="id_nombre" class="form-label">Nombre del evento</label>
+                            <input type="text" name="nombre" class="form-control" id="id_nombre" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="id_fecha" class="form-label">Fecha del evento</label>
+                            <input type="date" name="fecha" class="form-control" id="id_fecha" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="id_descripcion" class="form-label">Descripción del evento</label>
+                            <textarea name="descripcion" class="form-control" id="id_descripcion" rows="3"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-custom">
+                            <i class="fas fa-save"></i> Guardar Evento
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Recommendations Column -->
+            <div class="col-lg-4">
+                <div class="recommendations-container">
+                    <h3><i class="fas fa-lightbulb"></i> Recomendaciones Personalizadas</h3>
+                    <div class="recommendations-content">
+                        {{ recomendaciones|linebreaks }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <i class="fas fa-graduation-cap"></i> StudentEase
+                </div>
+                <div class="footer-links">
+                    <a href="{% url 'home' %}"><i class="fas fa-home"></i> Inicio</a>
+                    <a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz4fnFO9gybB5E2aV7CHJd3T5PiQvfYGigvQFjXg6t2xgF1E6F27c5Jh4B" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-7sVONswmY9g7iqkUskgDmf+u2VPAenPqFqE7MEE6i8g5+lgzLK6QLlW1h6gq5Pjt" crossorigin="anonymous"></script>
+</body>
+</html>
