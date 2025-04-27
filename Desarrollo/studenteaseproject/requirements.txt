@@ -1,0 +1,5 @@
+django
+openai
+requests
+python-dotenv
+pillow
