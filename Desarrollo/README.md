@@ -10,6 +10,7 @@ El proyecto StudentEase se realizó a través del framework Django para desarrol
 
 El siguiente diagrama representa la solución codificada en un alto nivel.
 
+![image](https://github.com/user-attachments/assets/2134c618-097f-4fb5-ab1b-2d86bb276bb8)
 
 ### 📡 Diagrama de despliegue
 
