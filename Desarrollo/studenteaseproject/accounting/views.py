@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import User
 from .forms import UserForm, EstudianteForm
 
@@ -44,3 +45,8 @@ def login_view(request):
             messages.error(request, 'Error en el nombre de usuario o la contraseña.')
 
     return render(request, 'login.html')
+
+@login_required
+def logout_view(request):
+    logout(request)
+    return redirect('landing')
