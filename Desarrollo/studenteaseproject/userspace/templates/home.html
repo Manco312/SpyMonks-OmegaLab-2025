@@ -365,7 +365,7 @@
                                 Comienza configurando tu semestre actual, añade tus materias y créditos.
                             {% endif %}
                         </p>
-                        <a href="{% if semestre_creado %}{% url 'crear_semestre' %}{% else %}{% url 'crear_semestre' %}{% endif %}" class="btn btn-custom w-100">
+                        <a href="{% if semestre_creado %}{% url 'registrar_materias' %}{% else %}{% url 'crear_semestre' %}{% endif %}" class="btn btn-custom w-100">
                             <i class="fas fa-edit"></i>
                             {% if semestre_creado %}
                                 Gestionar Semestre

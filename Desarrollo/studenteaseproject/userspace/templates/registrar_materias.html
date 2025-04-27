@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Materias - StudentEase</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEJQ2iqY7cMw3X9A2DX2INp6A4x2iCZbFQebcnEbkzVp6ISvHkzoXfz59ZxW8" crossorigin="anonymous">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --white: #fafafa;
+            --dark-blue: #003153;
+            --coral: #ff6b6b;
+            --light-blue: #b0d0d3;
+            --blue-gray: #bccad6;
+        }
+        
+        body {
+            background-color: var(--white);
+            font-family: 'Poppins', sans-serif;
+            color: #333;
+            padding-top: 20px;
+        }
+        
+        /* Navbar Styling */
+        .navbar {
+            background-color: var(--dark-blue);
+            box-shadow: 0 4px 15px rgba(0, 49, 83, 0.2);
+            padding: 15px 0;
+            border-radius: 50px;
+            margin: 0 15px 20px 15px;
+            max-width: calc(100% - 30px);
+            overflow: hidden;
+        }
+        
+        .navbar-container {
+            padding: 0 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            position: relative;
+        }
+        
+        .navbar .navbar-brand {
+            color: var(--white);
+            font-weight: 700;
+            font-size: 1.5rem;
+            letter-spacing: 0.5px;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+        
+        .user-profile {
+            display: flex;
+            align-items: center;
+            margin-right: 20px;
+            padding-right: 10px;
+        }
+        
+        .navbar .navbar-text {
+            color: var(--white);
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 200px;
+        }
+        
+        .navbar .navbar-text i {
+            margin-right: 8px;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+        
+        /* Card Styling */
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 49, 83, 0.08);
+            margin-bottom: 30px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .card-header {
+            background-color: var(--dark-blue);
+            color: var(--white);
+            font-weight: 600;
+            padding: 15px 20px;
+            border: none;
+        }
+        
+        .card-body {
+            padding: 25px;
+        }
+        
+        /* Form Elements */
+        .form-label {
+            font-weight: 600;
+            color: var(--dark-blue);
+            margin-bottom: 8px;
+        }
+        
+        .form-control {
+            border-radius: 50px;
+            padding: 12px 20px;
+            border: 2px solid var(--blue-gray);
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+            border-color: var(--dark-blue);
+            box-shadow: 0 0 0 0.25rem rgba(0, 49, 83, 0.25);
+        }
+        
+        .form-text {
+            color: #666;
+            font-size: 0.85rem;
+            margin-top: 5px;
+        }
+        
+        /* Buttons */
+        .btn-custom {
+            background-color: var(--dark-blue);
+            color: var(--white);
+            border: none;
+            border-radius: 50px;
+            padding: 12px 25px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 49, 83, 0.2);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .btn-custom i {
+            margin-right: 8px;
+        }
+        
+        .btn-custom:hover {
+            background-color: var(--coral);
+            color: var(--white);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(255, 107, 107, 0.3);
+        }
+        
+        .btn-outline-custom {
+            background-color: transparent;
+            color: var(--dark-blue);
+            border: 2px solid var(--dark-blue);
+            border-radius: 50px;
+            padding: 10px 25px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-outline-custom:hover {
+            background-color: var(--dark-blue);
+            color: var(--white);
+        }
+        
+        .btn-danger-custom {
+            background-color: transparent;
+            color: var(--coral);
+            border: 2px solid var(--coral);
+            border-radius: 50px;
+            padding: 8px 15px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-danger-custom:hover {
+            background-color: var(--coral);
+            color: var(--white);
+        }
+        
+        /* Table Styling */
+        .table-container {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 49, 83, 0.05);
+        }
+        
+        .table {
+            margin-bottom: 0;
+        }
+        
+        .table thead {
+            background-color: var(--dark-blue);
+            color: var(--white);
+        }
+        
+        .table thead th {
+            font-weight: 600;
+            border: none;
+            padding: 15px;
+        }
+        
+        .table tbody tr:nth-child(even) {
+            background-color: rgba(176, 208, 211, 0.1);
+        }
+        
+        .table tbody td {
+            padding: 15px;
+            vertical-align: middle;
+            border-color: #f0f0f0;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: #666;
+        }
+        
+        .empty-state i {
+            font-size: 3rem;
+            color: var(--blue-gray);
+            margin-bottom: 15px;
+        }
+        
+        .empty-state p {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+        
+        /* Alert Messages */
+        .alert {
+            border-radius: 10px;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            border: none;
+        }
+        
+        .alert-success {
+            background-color: rgba(40, 167, 69, 0.1);
+            border-left: 4px solid #28a745;
+            color: #28a745;
+        }
+        
+        .alert-danger {
+            background-color: rgba(220, 53, 69, 0.1);
+            border-left: 4px solid #dc3545;
+            color: #dc3545;
+        }
+        
+        /* Semestre Info */
+        .semestre-info {
+            background: linear-gradient(135deg, var(--blue-gray) 0%, var(--light-blue) 100%);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            color: var(--dark-blue);
+            box-shadow: 0 5px 15px rgba(0, 49, 83, 0.1);
+        }
+        
+        .semestre-info h3 {
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .semestre-info p {
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+        }
+        
+        .semestre-info strong {
+            font-weight: 600;
+        }
+        
+        /* Footer */
+        .footer {
+            background-color: var(--dark-blue);
+            color: var(--white);
+            padding: 30px 0;
+            margin-top: 50px;
+            border-radius: 50px 50px 0 0;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 25px;
+        }
+        
+        .footer-logo {
+            font-weight: 700;
+            font-size: 1.3rem;
+        }
+        
+        .footer-links a {
+            color: var(--white);
+            margin-left: 20px;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--coral);
+        }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .navbar {
+                border-radius: 30px;
+                margin: 0 10px 15px 10px;
+            }
+            
+            .navbar-container {
+                padding: 0 15px;
+            }
+            
+            .navbar .navbar-brand {
+                font-size: 1.2rem;
+                margin-right: 10px;
+            }
+            
+            .user-profile {
+                margin-right: 15px;
+            }
+            
+            .navbar .navbar-text {
+                max-width: 120px;
+                font-size: 0.9rem;
+            }
+            
+            .card-body {
+                padding: 15px;
+            }
+            
+            .table-responsive {
+                border-radius: 15px;
+                overflow: hidden;
+            }
+            
+            .footer {
+                border-radius: 30px 30px 0 0;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+                padding: 0 15px;
+            }
+            
+            .footer-links {
+                margin-top: 15px;
+            }
+            
+            .footer-links a {
+                margin: 0 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <div class="navbar-container">
+                <a class="navbar-brand" href="{% url 'home' %}">
+                    <i class="fas fa-graduation-cap"></i> StudentEase
+                </a>
+                <div class="user-profile">
+                    <span class="navbar-text">
+                        <i class="fas fa-user-circle"></i> {{ user_name }}
+                    </span>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Messages -->
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert {% if message.tags == 'error' %}alert-danger{% elif message.tags == 'success' %}alert-success{% else %}alert-{{ message.tags }}{% endif %}" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+        
+        <!-- Semestre Info -->
+        <div class="semestre-info">
+            <h3>Información del Semestre</h3>
+            <p><strong>Semestre:</strong> {{ semestre.numero_semestre }}</p>
+            <p><strong>Créditos totales:</strong> {{ semestre.numero_creditos }}</p>
+            <p><strong>Horas libres semanales:</strong> {{ semestre.horas_libres }}</p>
+        </div>
+        
+        <div class="row">
+            <!-- Formulario para añadir materias -->
+            <div class="col-lg-4 mb-4">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-plus-circle me-2"></i> Registrar Nueva Materia
+                    </div>
+                    <div class="card-body">
+                        <form method="POST">
+                            {% csrf_token %}
+                            
+                            
+                            {{ form.as_p }}
+                            
+                            <button type="submit" class="btn btn-custom w-100 mt-3">
+                                <i class="fas fa-plus"></i> Añadir Materia
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tabla de materias registradas -->
+            <div class="col-lg-8">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-book me-2"></i> Materias Registradas
+                    </div>
+                    <div class="card-body">
+                        {% if materias %}
+                            <div class="table-responsive table-container">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Nombre</th>
+                                            {% if form.codigo %}<th>Código</th>{% endif %}
+                                            {% if form.creditos %}<th>Créditos</th>{% endif %}
+                                            <th>Nota</th>
+                                            <th>% Evaluado</th>
+                                            {% if form.horas_semanales %}<th>Horas Sem.</th>{% endif %}
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for materia in materias %}
+                                            <tr>
+                                                <td>{{ materia.nombre }}</td>
+                                                {% if form.codigo %}<td>{{ materia.codigo|default:"-" }}</td>{% endif %}
+                                                {% if form.creditos %}<td>{{ materia.creditos|default:"-" }}</td>{% endif %}
+                                                <td>{{ materia.nota }}</td>
+                                                <td>{{ materia.porcentaje_evaluado }}%</td>
+                                                {% if form.horas_semanales %}<td>{{ materia.horas_semanales|default:"-" }}</td>{% endif %}
+                                                <td>
+                                                    <a href="{% url 'eliminar_materia' materia.id %}" class="btn btn-danger-custom btn-sm" onclick="return confirm('¿Estás seguro de que deseas eliminar esta materia?')">
+                                                        <i class="fas fa-trash-alt"></i> Eliminar
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        {% else %}
+                            <div class="empty-state">
+                                <i class="fas fa-book-open"></i>
+                                <p>Aún no has registrado materias para este semestre.</p>
+                                <p class="text-muted">Utiliza el formulario para añadir tus materias.</p>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+                
+                <!-- Botones de acción -->
+                <div class="d-flex justify-content-between mt-4">
+                    <a href="{% url 'home' %}" class="btn btn-outline-custom">
+                        <i class="fas fa-arrow-left"></i> Volver al Inicio
+                    </a>
+                    
+                    {% if materias %}
+                    <a href="#" class="btn btn-custom">
+                        <i class="fas fa-chart-bar"></i> Ver Estadísticas
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz4fnFO9gybB5E2aV7CHJd3T5PiQvfYGigvQFjXg6t2xgF1E6F27c5Jh4B" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-7sVONswmY9g7iqkUskgDmf+u2VPAenPqFqE7MEE6i8g5+lgzLK6QLlW1h6gq5Pjt" crossorigin="anonymous"></script>
+</body>
+</html>

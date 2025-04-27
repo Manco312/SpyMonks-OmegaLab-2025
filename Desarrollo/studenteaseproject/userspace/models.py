@@ -14,6 +14,7 @@ class Semestre(models.Model):
     
 class Materia(models.Model):
     semestre = models.ForeignKey(Semestre, on_delete=models.CASCADE)
+    creditos = models.IntegerField()
     nombre = models.CharField(max_length=50)
     nota = models.FloatField()
     porcentaje_evaluado = models.IntegerField()
