@@ -1,1 +1,143 @@
-<h1>Hola mundo</h1>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudentEase</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #fafafa;
+            min-height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+        .landing-card {
+            background-color: #bccad6;
+            color: #003153;
+            padding: 3rem 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+        .btn-login {
+            background-color: #ff6b6b;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            padding: 0.75rem 2rem;
+            font-size: 1.2rem;
+            margin: 0.5rem;
+            transition: background-color 0.3s ease;
+        }
+        .btn-login:hover {
+            background-color: #e85c5c;
+        }
+        .btn-signup {
+            background-color: #b0d0d3;
+            color: #003153;
+            border: none;
+            border-radius: 30px;
+            padding: 0.75rem 2rem;
+            font-size: 1.2rem;
+            margin: 0.5rem;
+            transition: background-color 0.3s ease;
+        }
+        .btn-signup:hover {
+            background-color: #9abec2;
+        }
+        .confetti {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="d-flex justify-content-center align-items-center min-vh-100">
+        <div class="landing-card">
+            <h1 class="display-5 fw-bold mb-4">Bienvenido a StudentEase</h1>
+            <p class="lead mb-5">Simplifica tu vida académica con nuestra plataforma intuitiva y poderosa.</p>
+            <div>
+                <a href="{% url 'login' %}" class="btn btn-login">Iniciar Sesión</a>
+                <a href="{% url 'signup' %}" class="btn btn-signup">Registrarse</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confetti background -->
+    <canvas id="confettiCanvas" class="confetti"></canvas>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Simple confetti animation
+        const canvas = document.getElementById('confettiCanvas');
+        const ctx = canvas.getContext('2d');
+        let width = window.innerWidth;
+        let height = window.innerHeight;
+        canvas.width = width;
+        canvas.height = height;
+
+        const confetti = [];
+
+        function randomColor() {
+            const colors = ['#ff6b6b', '#b0d0d3', '#003153'];
+            return colors[Math.floor(Math.random() * colors.length)];
+        }
+
+        function createConfettiPiece() {
+            return {
+                x: Math.random() * width,
+                y: Math.random() * height - height,
+                size: Math.random() * 8 + 2,
+                color: randomColor(),
+                speed: Math.random() * 3 + 1,
+                drift: Math.random() * 2 - 1
+            };
+        }
+
+        for (let i = 0; i < 150; i++) {
+            confetti.push(createConfettiPiece());
+        }
+
+        function drawConfetti() {
+            ctx.clearRect(0, 0, width, height);
+            confetti.forEach(p => {
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fillStyle = p.color;
+                ctx.fill();
+            });
+            moveConfetti();
+            requestAnimationFrame(drawConfetti);
+        }
+
+        function moveConfetti() {
+            confetti.forEach(p => {
+                p.y += p.speed;
+                p.x += p.drift;
+                if (p.y > height) {
+                    p.y = 0;
+                    p.x = Math.random() * width;
+                }
+            });
+        }
+
+        window.addEventListener('resize', () => {
+            width = window.innerWidth;
+            height = window.innerHeight;
+            canvas.width = width;
+            canvas.height = height;
+        });
+
+        drawConfetti();
+    </script>
+</body>
+</html>
