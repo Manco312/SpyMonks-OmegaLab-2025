@@ -16,3 +16,4 @@ El siguiente diagrama representa la solución codificada en un alto nivel.
 
 El siguiente diagrama representa cómo estaría desplegada la aplicación cuando ya esté abierta al público, logrando que ingresen usuarios desde sus computadores o desde sus celulares.
 
+![Untitled (1)](https://github.com/user-attachments/assets/23590b22-23be-453c-aff1-3a4b93657f37)
